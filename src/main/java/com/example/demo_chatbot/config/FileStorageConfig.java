@@ -9,7 +9,7 @@ public class FileStorageConfig {
     public String getUploadDir() {
         // Trỏ tới thư mục "uploads" trong thư mục gốc của project
         String projectDir = System.getProperty("user.dir"); // Thư mục gốc của project
-        String uploadDir = projectDir + "/uploads/"; // Thư mục "uploads" trong project
+        String uploadDir = projectDir + "/demo-chatbot/uploads/"; // Thư mục "uploads" trong project
         return uploadDir;
     }
 }

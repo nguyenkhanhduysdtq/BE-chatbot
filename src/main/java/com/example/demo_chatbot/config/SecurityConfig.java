@@ -42,7 +42,8 @@ public class SecurityConfig {
             "/chat",
             "/create/description",
             "/ingest/description",
-            "/index"
+            "/index",
+            "/question"
 
     };
 
@@ -53,7 +54,10 @@ public class SecurityConfig {
             "/sync/documents",
             "/documentSync",
             "/v1/document",
-            "/v1/documents"
+            "/v1/documents",
+            "/clients",
+            "/questions",
+            "/export/questions"
     };
 
     private final String[] PUBLIC_ENDPOINTS_DELETE = {

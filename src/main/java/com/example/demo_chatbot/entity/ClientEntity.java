@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Table(name = "client")
 @Entity
 @Getter
@@ -14,10 +16,12 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ClientEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    String id;
     String name;
     long phone;
     String email;
     String createDate;
+
+    @OneToMany(mappedBy = "client")
+    List<InforQuestionEntity> question;
 }

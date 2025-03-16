@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RequestDocument {
-
+    String userId;
     String question;
     int status;
 

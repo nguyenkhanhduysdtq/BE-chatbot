@@ -129,7 +129,7 @@ public class SyncService implements ISyncService {
             DeleteByQueryResponse response = elasticsearchClient.deleteByQuery(d -> d
                     .index(INDEX_NAME_DESCRIPTION)
                     .query(q -> q
-                            .match(m -> m // Dùng match thay vì term
+                            .match(m -> m
                                     .field("store")
                                     .query(entity.get().getCollectionDB())
                             )

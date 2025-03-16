@@ -16,20 +16,15 @@ import com.example.demo_chatbot.index.DocumentBasic;
 import com.example.demo_chatbot.index.DocumentStore;
 import com.example.demo_chatbot.repository.DocumentSyncRepository;
 import com.example.demo_chatbot.repository.FileRepository;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
 import com.itextpdf.kernel.pdf.canvas.parser.PdfTextExtractor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.embedding.EmbeddingModel;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
-import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.elasticsearch.ElasticsearchVectorStore;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,13 +43,12 @@ public class DocumentService {
     String OPENAI_API_KEY ;
 
 
-    private final ElasticsearchOperations elasticsearchOperations;
+
 
     private final ElasticsearchClient elasticsearchClient;
 
     private  ElasticsearchVectorStore vectorStore;
 
-    private  ChatClient chatClient;
 
     private final DocumentSyncRepository  repository;
 
@@ -62,11 +56,9 @@ public class DocumentService {
 
     private final EmbeddingModel embeddingModel;
 
-    public DocumentService(ElasticsearchVectorStore vectorStore, ChatClient.Builder clientBuilder ,ElasticsearchOperations elasticsearchOperations ,EmbeddingModel embeddingModel
+    public DocumentService(ElasticsearchVectorStore vectorStore ,EmbeddingModel embeddingModel
     ,ElasticsearchClient elasticsearchClient , DocumentSyncRepository  repository , FileRepository fileRepository) {
         this.vectorStore = vectorStore;
-        this.chatClient = clientBuilder.build();
-        this.elasticsearchOperations = elasticsearchOperations;
         this.embeddingModel = embeddingModel;
         this.elasticsearchClient = elasticsearchClient;
         this.repository = repository;
@@ -79,8 +71,8 @@ public class DocumentService {
         // Lấy đường dẫn tuyệt đối của thư mục gốc của project
         String projectRoot = System.getProperty("user.dir");
 
-        // Ghép đường dẫn đến thư mục uploads
-        File file = new File(projectRoot + File.separator + "uploads" + File.separator + fileName);
+        // Ghép đường dẫn đến thư mục demo-chatbot/uploads
+        File file = new File(projectRoot + File.separator + "demo-chatbot" + File.separator + "uploads" + File.separator + fileName);
 
         if (!file.exists()) {
             throw new RuntimeException("File không tồn tại: " + file.getAbsolutePath());
@@ -387,7 +379,9 @@ if(question.getStatus() == 1) {
     }
 
 
+
     public String searchDescriptionDB(RequestDocument question) throws IOException {
+
 
         float[] questionEmbedding = embeddingModel.embed(question.getQuestion());
 

@@ -3,17 +3,18 @@ package com.example.demo_chatbot.dto.document;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-@Setter
 @Getter
+@Setter
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class ClientDTO {
-    String id;
-    String name;
-    long phone;
-    String email;
-    String createDate;
+public class QuestionDTO {
 
+    int id;
+    String question;
+    String answer;
+    String date;
+    String time;
+    String client_id;
 }

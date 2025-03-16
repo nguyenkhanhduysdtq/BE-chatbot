@@ -11,6 +11,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 public class ClientRequestDTO {
+    String id;
     String name;
     long phone;
     String email;
