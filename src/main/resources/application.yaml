@@ -9,7 +9,7 @@ server:
 spring:
   ai:
     openai:
-      api-key: "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"
+      api-key: ""
     chat:
       client:
         enabled: true
